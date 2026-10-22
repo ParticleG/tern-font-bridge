@@ -7,7 +7,7 @@ Unofficial LSPosed native module replacing Tern’s bundled Regular font source 
 ## 状态 / Status
 
 - 原型 `local.tern.diagnostic` 0.3 已在用户设备验证：冷启动直接生效，中文正常，设置页默认字体名称变为 Maple。
-- 此仓库使用新包名 `io.github.particleg.ternfontbridge`；重命名版本仅完成构建，尚未进行设备运行验证。
+- 新包名 `io.github.particleg.ternfontbridge` 的 Actions/NDK 构建、正式签名 dev APK 已在禁用旧模块后通过设备冷启动验证，中文正常显示。该验证不代表长期稳定性或所有字重、符号均正常。
 - 实验性软件；仅替换 BerkeleyMono Regular。Medium/粗体未替换，真正的 Italic 未嵌入，部分 UI 符号仍可能缺失。
 - 无网络权限，不修改 Tern APK、系统字体或 SELinux。
 
@@ -23,9 +23,13 @@ Unofficial LSPosed native module replacing Tern’s bundled Regular font source 
 
 原型测试环境：LSPosed 2.0.2 (7668)，Zygisk Next 1.5.0，Android API 36，arm64。未验证全部 LSPosed 分支。
 
+## v0.3.0 发布范围
+
+首个公开版本保留已验证的 Regular-only 实现。正式包与已测试 dev 包使用相同签名，versionCode 从 1 升至 6002，可覆盖升级；旧包名原型不能覆盖升级，必须保持禁用。
+
 ## 安装与撤销
 
-1. 保存会话，安装自行构建并签名的 APK。
+1. 保存会话，从 [Releases](https://github.com/ParticleG/tern-font-bridge/releases) 下载签名 APK，或自行构建并签名。
 2. **先禁用旧的 Tern Font Diagnostic 模块**，不要同时启用两者。
 3. 启用 Tern Font Bridge，只勾选 `so.stencil.tern`。
 4. 强行停止并重开 Tern。原型在字体设置留空时已自动采用 Maple。
@@ -36,7 +40,7 @@ Unofficial LSPosed native module replacing Tern’s bundled Regular font source 
 
 ## 构建（Termux / ARM64 Android）
 
-当前脚本专用于 Termux，并依赖 Android 系统库；不是通用 Linux/NDK 或 Gradle 构建。
+本节的 `build.sh` 专用于 Termux，并依赖 Android 系统库；云端使用独立的 `scripts/ci-build.sh` 和标准 Android SDK/NDK。
 
 ```sh
 pkg install clang python openjdk-21 d8 aapt aapt2 apksigner curl
