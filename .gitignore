@@ -1,0 +1,14 @@
+/build/
+/deps/
+/signing/
+*.apk
+*.idsig
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.log
+*.bak
+.env
+.env.*

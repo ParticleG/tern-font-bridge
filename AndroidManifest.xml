@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.particleg.ternfontbridge" android:versionCode="1" android:versionName="0.3.0-preview">
+<uses-sdk android:minSdkVersion="28" android:targetSdkVersion="35"/>
+<application android:label="Tern Font Bridge" android:allowBackup="false" android:hasCode="true">
+<meta-data android:name="xposedmodule" android:value="true"/>
+<meta-data android:name="xposeddescription" android:value="Experimental BerkeleyMono Regular source replacement with Maple NF CN for Tern 0.9.5."/>
+<meta-data android:name="xposedminversion" android:value="82"/>
+<meta-data android:name="xposedscope" android:resource="@array/xposed_scope"/>
+</application></manifest>
