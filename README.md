@@ -83,3 +83,21 @@ apksigner verify --verbose build/tern-font-bridge-0.3.0-preview.apk
 
 - https://github.com/LSPosed/LSPosed/wiki/Native-Hook
 - https://github.com/LSPosed/LSPosed/wiki/Module-Scope
+
+## GitHub Actions 自动签名与发布
+
+工作流使用 Ubuntu、NDK 27.2.12479018、Android SDK 35 / Build Tools 35.0.0 与 Java 21。第三方 Actions 固定到提交 SHA。
+
+- 推送 `vX.Y.Z`：构建正式签名 APK、上传 Actions artifact，创建正式 Release 并附加 APK / SHA256SUMS。
+- 推送 `preX.Y.Z`：同上，但创建 Prerelease（不标记 latest）。
+- 手动 workflow_dispatch：生成正式签名的 dev APK artifact，不创建 Release。
+- tag 使用严格数字格式，不接受后缀或前导零；每段 0–999。
+- versionCode = `(major * 1000000 + minor * 1000 + patch) * 2 + stage`，预发布 stage=1，正式 stage=2。同版本预发布可升级正式版。dev 构建 code=1，仅供测试。
+- 重跑已有发布标签不会覆盖现有 Release；需要新版本请推送新 tag。
+
+仓库 Secrets：ANDROID_KEYSTORE_BASE64、ANDROID_KEYSTORE_PASSWORD、ANDROID_KEY_ALIAS、ANDROID_KEY_PASSWORD。
+仓库变量 ANDROID_CERT_SHA256 用于校验签名证书。密钥只在签名步骤解码到 runner 临时目录，用后删除，不进入 artifact。
+
+正式证书 SHA-256：`52468c95a3e1c6cbd766eec99620575aafb0f72c249c945d1c447a409b004889`。
+
+请限制仓库写权限并保护发布标签：可修改工作流的人可能滥用签名 Secrets。GitHub Secrets 不是可导出的密钥备份，应另行安全备份发布密钥。
