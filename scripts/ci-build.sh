@@ -8,6 +8,7 @@ CC="$NDK/bin/aarch64-linux-android28-clang"
 ANDROID_JAR="$ANDROID_HOME/platforms/android-35/android.jar"
 bash fetch-deps.sh
 echo '9ae0c348a44a681fa8fa20a34e782e95316cec880102295a128b65760944c0f5  native/Maple-Regular.ttf' | sha256sum -c -
+echo '9c557f47bc44ad4cc00d46e2ca73d61b666f00ad914d636ead01524ff37625ce  native/TernUI-Regular.ttf' | sha256sum -c -
 mkdir -p build/classes build/dex build/lib/arm64-v8a
 "$CC" -shared -fPIC -O2 -fvisibility=hidden -mno-outline-atomics -Wall -Wextra -Werror -I"$NDK/sysroot/usr/include" -Wl,-z,max-page-size=16384 -Wl,-z,now -Wl,-z,relro -Wl,--no-undefined -Wl,-soname,libternprobe.so native/probe.c native/entry.S native/font.S -llog -ldl -o build/lib/arm64-v8a/libternprobe.so
 javac --release 8 -cp "deps/xposed-api-82.jar:$ANDROID_JAR" -d build/classes src/io/github/particleg/ternfontbridge/MainHook.java

@@ -4,6 +4,7 @@ cd "$(dirname "$0")"
 umask 077
 echo '9ae0c348a44a681fa8fa20a34e782e95316cec880102295a128b65760944c0f5  native/Maple-Regular.ttf' | sha256sum -c -
 sha256sum -c deps.sha256
+echo '9c557f47bc44ad4cc00d46e2ca73d61b666f00ad914d636ead01524ff37625ce  native/TernUI-Regular.ttf' | sha256sum -c -
 mkdir -p build/classes build/dex build/lib/arm64-v8a
 clang -c -fPIC -O2 -fvisibility=hidden -mno-outline-atomics -Wall -Wextra -Werror native/probe.c -o build/probe.o
 clang -c -fPIC native/entry.S -o build/entry.o
@@ -23,5 +24,5 @@ with zipfile.ZipFile('build/resources.apk') as src, zipfile.ZipFile('build/unsig
 PY
 zipalign -f 16384 build/unsigned.apk build/aligned.apk
 zipalign -c -v 16384 build/aligned.apk
-cp build/aligned.apk build/tern-font-bridge-0.3.0-preview-unsigned.apk
+cp build/aligned.apk build/tern-font-bridge-0.3.1-ui-test-unsigned.apk
 printf '\nUnsigned build complete. Sign separately before installing.\n'

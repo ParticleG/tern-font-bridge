@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1-pre
+
+- Add a pointer/length-guarded Geist source replacement with Tern UI Symbols (OFL derivative).
+- Add Command, Control, Option, Escape, Backspace, Return and Delete glyphs from pinned Noto sources; keep Maple Regular substitution.
+- Include font provenance, input/output hashes, generation tooling and both upstream licenses.
+- Local signed UI test APK verified after cold start: settings now shows `⌘= / ⌘−`; logs confirm both replacements and restored memory protection.
+- Cloud prerelease artifact still requires its own smoke test. Other symbols, UI layouts and long-term stability are not fully verified.
+
+
 ## 0.3.0
 
 ### Features

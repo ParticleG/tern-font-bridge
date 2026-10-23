@@ -22,3 +22,6 @@ SOFTWARE.
 
 The bundled Maple font is separately licensed under SIL OFL 1.1;
 see assets/licenses/MapleMono-OFL.txt.
+
+The bundled Tern UI Symbols derivative is also separately licensed under
+SIL OFL 1.1; see assets/licenses/Geist-OFL.txt and Noto-OFL.txt.

@@ -8,7 +8,7 @@ Unofficial LSPosed native module replacing Tern’s bundled Regular font source 
 
 - 原型 `local.tern.diagnostic` 0.3 已在用户设备验证：冷启动直接生效，中文正常，设置页默认字体名称变为 Maple。
 - 新包名 `io.github.particleg.ternfontbridge` 的 Actions/NDK 构建、正式签名 dev APK 已在禁用旧模块后通过设备冷启动验证，中文正常显示。该验证不代表长期稳定性或所有字重、符号均正常。
-- 实验性软件；仅替换 BerkeleyMono Regular。Medium/粗体未替换，真正的 Italic 未嵌入，部分 UI 符号仍可能缺失。
+- 0.3.1 预发布新增 UI 字体源替换，补齐常用键盘符号；Medium/粗体未替换，真正的 Italic 未嵌入，其他字符仍可能缺失。
 - 无网络权限，不修改 Tern APK、系统字体或 SELinux。
 
 ## 兼容性
@@ -48,7 +48,7 @@ bash fetch-deps.sh
 bash build.sh
 ```
 
-产物：`build/tern-font-bridge-0.3.0-preview-unsigned.apk`。原生库以 ZIP_STORED 存储，按 16 KB 对齐。
+产物：`build/tern-font-bridge-0.3.1-ui-test-unsigned.apk`。原生库以 ZIP_STORED 存储，按 16 KB 对齐。
 
 依赖 JAR 的 SHA-256 固定在 `deps.sha256`。旧版 Android stub JAR 仅用于编译和资源打包，不打包进模块；运行最低版本声明为 API 28，不代表所有 API 28 设备已验证。
 
@@ -58,8 +58,8 @@ bash build.sh
 
 ```sh
 keytool -genkeypair -keystore /your/private/path/release.p12 -storetype PKCS12 -alias release -keyalg RSA -keysize 3072 -validity 10000
-apksigner sign --ks /your/private/path/release.p12 --ks-key-alias release --out build/tern-font-bridge-0.3.0-preview.apk build/tern-font-bridge-0.3.0-preview-unsigned.apk
-apksigner verify --verbose build/tern-font-bridge-0.3.0-preview.apk
+apksigner sign --ks /your/private/path/release.p12 --ks-key-alias release --out build/tern-font-bridge-0.3.1-ui-test.apk build/tern-font-bridge-0.3.1-ui-test-unsigned.apk
+apksigner verify --verbose build/tern-font-bridge-0.3.1-ui-test.apk
 ```
 
 不要把私钥、密码或原型测试密钥提交到 Git。更换包名会并行安装；同包名换签名通常无法覆盖升级。
@@ -105,3 +105,22 @@ apksigner verify --verbose build/tern-font-bridge-0.3.0-preview.apk
 正式证书 SHA-256：`52468c95a3e1c6cbd766eec99620575aafb0f72c249c945d1c447a409b004889`。
 
 请限制仓库写权限并保护发布标签：可修改工作流的人可能滥用签名 Secrets。GitHub Secrets 不是可导出的密钥备份，应另行安全备份发布密钥。
+
+## 0.3.1 UI 符号修复（预发布）
+
+设置页原来的 `□= / □−` 已在本地签名测试包 `0.3.1-ui-test` 冷启动后显示为 `⌘= / ⌘−`。日志同时确认 `UI_REPLACE`、`MAPLE_REPLACE` 与页面保护恢复成功。此结果不等于云端预发布 APK 已经运行验证，也不代表所有新增符号或所有页面均已测试。
+
+新增字体 **Tern UI Symbols** 是上游 Geist Regular 加入 Noto Sans Symbols / Symbols 2 的七个字形的 OFL 派生版本。原有上游 Geist 字形与水平指标保持不变；但该上游版本与 Tern 内嵌字体不是同一个文件，UI 布局仍需回归检查。仅匹配原 Geist 指针及长度，不把整个 UI 换成 Maple。
+
+字体来源、提交、输入和输出哈希见 [UI-FONT-PROVENANCE](native/UI-FONT-PROVENANCE.md)。新增字体 SHA-256：`9c557f47bc44ad4cc00d46e2ca73d61b666f00ad914d636ead01524ff37625ce`。该字体独立采用 OFL，不适用源码 MIT 许可证；两份上游许可位于 assets/licenses 并随 APK 打包。
+
+重新生成字体（普通构建直接使用已提交 TTF，无需安装 fontTools）：
+
+```sh
+python -m venv .venv-fonts
+.venv-fonts/bin/pip install fonttools==4.60.1
+bash scripts/fetch-ui-fonts.sh
+.venv-fonts/bin/python scripts/make-ui-font.py
+```
+
+`pre0.3.1` 的 versionCode 为 6003，与本地 UI 测试包相同；正式签名一致，可覆盖安装。未来 `v0.3.1` 为 6004。旧 v0.3.0 为 6002，不保证直接覆盖降级；若需紧急撤销，先禁用模块并冷启动，不要清除 Tern 数据。

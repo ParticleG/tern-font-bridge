@@ -12,3 +12,7 @@
 *.bak
 .env
 .env.*
+
+.venv*/
+__pycache__/
+/dist/
