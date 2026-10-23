@@ -32,7 +32,7 @@ __attribute__((visibility("hidden"))) void select_source(const uintptr_t *source
   if(n<12) LOG("MAPLE_REPLACE[%u] caller=%p len=%zu; Regular only",n,caller,(size_t)pair[1]);
  }
  if(pair[0]==ui_source && pair[1]==169056) {
-  pair[0]=(uintptr_t)ui_start; pair[1]=126104; replace=2;
+  pair[0]=(uintptr_t)ui_start; pair[1]=128516; replace=2;
   unsigned n=atomic_fetch_add(&ui_replacements,1);
   if(n<12) LOG("UI_REPLACE[%u] caller=%p len=%zu",n,caller,(size_t)pair[1]);
  }
@@ -86,7 +86,7 @@ static int inspect(struct dl_phdr_info *i,size_t size,void *why) {
  LOG("%s: base=%p getter=%p slot=%p value=%p validation=%s; REPLACEMENT_PRECHECK",(char*)why,(void*)b,(void*)(b+0x7421b08),(void*)(b+0x80d4650),(void*)table[3],ok?"PASS":"FAIL");
  if(ok && covered(i,0xd0535b,2288420,PF_R) &&
     covered(i,0xcdbeee,169056,PF_R) && !memcmp((void*)(b+0xcdbeee),"\0\1\0\0",4) &&
-    (size_t)(ui_end-ui_start)==126104 && !memcmp(ui_start,"\0\1\0\0",4) &&
+    (size_t)(ui_end-ui_start)==128516 && !memcmp(ui_start,"\0\1\0\0",4) &&
     (size_t)(maple_end-maple_start)==20563672 && !memcmp(maple_start,"\0\1\0\0",4) &&
     !memcmp((void*)(b+0xd0535b),"\0\1\0\0",4)) install_slot(b);
  else LOG("replacement validation failed; using original fonts");
@@ -99,12 +99,12 @@ static void loaded(const char *name,void *handle) {
  if(!strcmp(s,"libtern.so")) {LOG("libtern load callback received"); dl_iterate_phdr(inspect,"load_callback");}
 }
 __attribute__((visibility("default"),used)) Callback native_init(const API *a) {
- LOG("native_init api=%u; Maple and UI symbols test 0.3.1; inline hook API not used",a?a->version:0);
+ LOG("native_init api=%u; Maple and UI symbols test 0.3.2; inline hook API not used",a?a->version:0);
  dl_iterate_phdr(inspect,"native_init_already_loaded");
  return loaded;
 }
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm,void *reserved) {
- (void)vm;(void)reserved; LOG("JNI_OnLoad UI symbols test 0.3.1");
+ (void)vm;(void)reserved; LOG("JNI_OnLoad UI symbols test 0.3.2");
  dl_iterate_phdr(inspect,"JNI_OnLoad_already_loaded");
  return JNI_VERSION_1_6;
 }

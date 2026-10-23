@@ -85,9 +85,13 @@ For runtime changes, smoke-test the exact signed artifact on a compatible LSPose
 Document the artifact/device actually tested. Existing prototype/dev validation does not establish that the exact tagged APK, all LSPosed variants, API 28 devices, or long-term stability have been verified.
 
 ## 0.3.1 UI symbol extension
-- Also substitute the original Geist source at 0xCDBEEE, length 169056, with native/TernUI-Regular.ttf (126104 bytes). This is an OFL derivative, not MIT.
+- Also substitute the original Geist source at 0xCDBEEE, length 169056, with native/TernUI-Regular.ttf (128516 bytes as of 0.3.2). This is an OFL derivative, not MIT.
 - Exact source matching and mapped-range/header checks cover both font sources. UI_REPLACE is independently bounded; the register-frame ABI is unchanged.
 - Input font commits/hashes and licensing are documented in native/UI-FONT-PROVENANCE.md. scripts/fetch-ui-fonts.sh downloads pinned upstream fonts; scripts/make-ui-font.py requires fonttools==4.60.1 and checks input hashes, original outlines/metrics and symbol coverage.
 - Local 0.3.1-ui-test was cold-start tested: Command symbols render correctly. Do not generalize that result to every glyph, the CI artifact or long-term stability.
 - The UI derivative preserves upstream Geist outlines/metrics, not necessarily those of Tern's differently versioned embedded font.
-- Current local unsigned output is build/tern-font-bridge-0.3.1-ui-test-unsigned.apk. Update documentation and both build-script hash gates when changing the UI payload.
+- Current local unsigned output is build/tern-font-bridge-0.3.2-spinner-test-unsigned.apk. Update documentation and both build-script hash gates when changing the UI payload.
+
+## 0.3.2 spinner coverage
+- The UI payload additionally contains five star and ten braille spinner characters; Maple is unchanged.
+- Another user reported continuous star animation with no tofu/jumping using the local signed test APK. Do not claim the cloud tag artifact or every spinner style was device-tested.

@@ -15,7 +15,7 @@ for name,digest in pins.items():
 f=TTFont(p/'Geist-Regular.ttf',recalcTimestamp=False)
 original=TTFont(p/'Geist-Regular.ttf',recalcTimestamp=False)
 donors=[TTFont(p/n) for n in ['NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf']]
-chars='⌘⌃⌥⇧⎋⌫⏎⌦⇥'
+chars='⌘⌃⌥⇧⎋⌫⏎⌦⇥✢✳✶✻✽⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
 order=list(f.getGlyphOrder());added=[]
 for ch in chars:
  cp=ord(ch)
@@ -32,7 +32,7 @@ for ch in chars:
   if t.isUnicode() and t.format in (4,12):t.cmap[cp]=new
  added.append(ch)
 f.setGlyphOrder(order)
-for nid,text in [(1,'Tern UI Symbols'),(2,'Regular'),(3,'Tern UI Symbols 0.3.1'),(4,'Tern UI Symbols Regular'),(6,'TernUISymbols-Regular'),(16,'Tern UI Symbols'),(17,'Regular')]:
+for nid,text in [(1,'Tern UI Symbols'),(2,'Regular'),(3,'Tern UI Symbols 0.3.2'),(4,'Tern UI Symbols Regular'),(6,'TernUISymbols-Regular'),(16,'Tern UI Symbols'),(17,'Regular')]:
  f['name'].removeNames(nameID=nid)
  f['name'].setName(text,nid,3,1,0x409)
 f['name'].setName('Derived from Geist and Noto Sans Symbols / Symbols 2; SIL OFL 1.1.',10,3,1,0x409)

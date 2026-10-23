@@ -112,7 +112,7 @@ apksigner verify --verbose build/tern-font-bridge-0.3.1-ui-test.apk
 
 新增字体 **Tern UI Symbols** 是上游 Geist Regular 加入 Noto Sans Symbols / Symbols 2 的七个字形的 OFL 派生版本。原有上游 Geist 字形与水平指标保持不变；但该上游版本与 Tern 内嵌字体不是同一个文件，UI 布局仍需回归检查。仅匹配原 Geist 指针及长度，不把整个 UI 换成 Maple。
 
-字体来源、提交、输入和输出哈希见 [UI-FONT-PROVENANCE](native/UI-FONT-PROVENANCE.md)。新增字体 SHA-256：`9c557f47bc44ad4cc00d46e2ca73d61b666f00ad914d636ead01524ff37625ce`。该字体独立采用 OFL，不适用源码 MIT 许可证；两份上游许可位于 assets/licenses 并随 APK 打包。
+字体来源、提交、输入和输出哈希见 [UI-FONT-PROVENANCE](native/UI-FONT-PROVENANCE.md)。当前 0.3.2 字体 SHA-256：`a683ad8e08732f96e909dbe1aaee309a42ab9aa56faaeb53538310a07b055a94`。该字体独立采用 OFL，不适用源码 MIT 许可证；两份上游许可位于 assets/licenses 并随 APK 打包。
 
 重新生成字体（普通构建直接使用已提交 TTF，无需安装 fontTools）：
 
@@ -124,3 +124,11 @@ bash scripts/fetch-ui-fonts.sh
 ```
 
 `pre0.3.1` 的 versionCode 为 6003，与本地 UI 测试包相同；正式签名一致，可覆盖安装。未来 `v0.3.1` 为 6004。旧 v0.3.0 为 6002，不保证直接覆盖降级；若需紧急撤销，先禁用模块并冷启动，不要清除 Tern 数据。
+
+## 0.3.2 Thinking spinner 修复（预发布）
+
+UI 字体补齐五个星形字符 `✢ ✳ ✶ ✻ ✽` 及十个点阵动画字符，Maple 字体及字体源匹配逻辑保持不变。
+
+另一位用户测试本地正式签名包 `0.3.2-spinner-test` 后反馈：Thinking 星形动画持续正常，无方框或明显位置跳动。此为用户反馈，不代表所有设备、样式、点阵动画或长期稳定性均已验证；云端 pre0.3.2 APK 仍需单独测试。云端 pre0.3.1 的快捷键修复已获设备验证。
+
+`pre0.3.2` 的 versionCode 为 6005，与本地 spinner 测试包相同，签名一致，可覆盖安装。未来 `v0.3.2` 为 6006。

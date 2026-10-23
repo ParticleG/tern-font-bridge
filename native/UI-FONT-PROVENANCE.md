@@ -7,9 +7,11 @@ Licenses: assets/licenses/Geist-OFL.txt and Noto-OFL.txt. Derivative remains SIL
 Build: fonttools==4.60.1; run scripts/make-ui-font.py with inputs in build/ui-font-inputs.
 Added glyphs: U+2318 U+2303 U+2325 U+238B U+232B U+23CE U+2326; existing Shift/Tab retained.
 All original upstream Geist outlines and horizontal metrics are checked unchanged. This upstream Geist is NOT byte-identical to Tern's embedded version, so UI differences remain possible.
-Output length 126104; SHA256 9c557f47bc44ad4cc00d46e2ca73d61b666f00ad914d636ead01524ff37625ce.
+Output length 128516; SHA256 a683ad8e08732f96e909dbe1aaee309a42ab9aa56faaeb53538310a07b055a94.
 
 Input SHA256:
 - NotoSansSymbols-Regular.ttf: 8f02f31959bbdf6061547a188248e13f84dc5fdd940326ec494675f453f072bb
 - Geist-Regular.ttf: 85a1c6b18a6b0a06dfe9fd4f6d6a5d4979f74ec861eaef4bc7868b5492b8a117
 - NotoSansSymbols2-Regular.ttf: 630846d528dbe4c4981370a4d0a9475a1fd1491a129bb411f8e157cdb5de13c6
+
+0.3.2 experiment: additionally includes U+2722/U+2733/U+2736/U+273B/U+273D and U+280B/U+2819/U+2839/U+2838/U+283C/U+2834/U+2826/U+2827/U+2807/U+280F from the same pinned Noto Sans Symbols 2 donor. Local signed 0.3.2-spinner-test: another user reported continuous Thinking star animation without tofu/jumping. Cloud prerelease and other styles remain unverified.

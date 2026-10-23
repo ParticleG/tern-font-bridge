@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.particleg.ternfontbridge" android:versionCode="6003" android:versionName="0.3.1-ui-test">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.particleg.ternfontbridge" android:versionCode="6005" android:versionName="0.3.2-spinner-test">
 <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="35"/>
 <application android:label="Tern Font Bridge" android:allowBackup="false" android:hasCode="true">
 <meta-data android:name="xposedmodule" android:value="true"/>

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.2-pre
+
+- Add all five star and ten braille spinner characters found in the supported Tern APK to the UI font, using the same pinned OFL Noto donor.
+- Keep Maple Regular and the guarded source-selection logic unchanged.
+- Another user reports that the local signed 0.3.2-spinner-test APK renders the Thinking star animation continuously without tofu or visible jumping.
+- Cloud pre0.3.2 artifact, other spinner styles/devices and long-term stability are not yet verified.
+- Cloud pre0.3.1 keyboard-symbol fix has now also been confirmed by the original tester.
+
+
 ## 0.3.1-pre
 
 - Add a pointer/length-guarded Geist source replacement with Tern UI Symbols (OFL derivative).
