@@ -1,11 +1,20 @@
 # Changelog
 
+## 0.3.2
+
+- Promote the tested pre0.3.2 implementation to a stable release without native-code or font-payload changes.
+- User confirmed the cloud-built pre0.3.2 APK passed device testing.
+- Includes Chinese Regular font replacement, UI keyboard symbols and Thinking spinner glyphs.
+- Stable versionCode is 6006 (prerelease: 6005), using the same release signing certificate.
+- Exact supported Tern APK/arm64 restriction remains; all devices, styles and long-term stability are not verified.
+
+
 ## 0.3.2-pre
 
 - Add all five star and ten braille spinner characters found in the supported Tern APK to the UI font, using the same pinned OFL Noto donor.
 - Keep Maple Regular and the guarded source-selection logic unchanged.
 - Another user reports that the local signed 0.3.2-spinner-test APK renders the Thinking star animation continuously without tofu or visible jumping.
-- Cloud pre0.3.2 artifact, other spinner styles/devices and long-term stability are not yet verified.
+- Cloud pre0.3.2 subsequently passed user device testing; other spinner styles/devices and long-term stability are not fully verified.
 - Cloud pre0.3.1 keyboard-symbol fix has now also been confirmed by the original tester.
 
 
